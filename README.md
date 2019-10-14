@@ -35,6 +35,8 @@ POST	/users
 
 POST	/organizations
 
+PUT		/users/<userId>
+
 PUT		/organizations/<organizationId>
 
 PUT		/organizations/<organizationId>/users/add?id=<userId>
