@@ -1,7 +1,8 @@
 # OrganizationsAndUsers
-
+This is a Spring Boot project that constructs end points to create/manipulate Organizations and Users and show the relationship between these two resources.
 
 ### Database Schema
+##### H2 Database is used
 ![DB Relations](https://github.com/Yunukas/OrganizationsAndUsers/blob/master/db_relation.png)
 
 
