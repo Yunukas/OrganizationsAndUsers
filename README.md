@@ -3,7 +3,7 @@ This is a Spring Boot project that constructs end points to create/manipulate Or
 
 ### Database Schema
 ##### H2 Database is used
-![DB Relations](https://github.com/Yunukas/OrganizationsAndUsers/blob/master/db_relation.png)
+![Database Diagram](https://github.com/Yunukas/OrganizationsAndUsers/blob/master/db_relation.png)
 
 
 ### Project Structure
@@ -42,6 +42,6 @@ PUT		    /organizations/{organizationId}
 
 PUT		    /organizations/{organizationId}/users/add?id={userId}
 
-DELETE    /users/{userId}
+DELETE      /users/{userId}
 
-DELETE	  /organizations/{organizationId}/users/delete?id={userId}
+DELETE	    /organizations/{organizationId}/users/delete?id={userId}
