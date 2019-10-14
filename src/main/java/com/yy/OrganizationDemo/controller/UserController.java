@@ -2,7 +2,6 @@ package com.yy.OrganizationDemo.controller;
 
 import com.yy.OrganizationDemo.dto.OrganizationDto;
 import com.yy.OrganizationDemo.dto.UserDto;
-import com.yy.OrganizationDemo.entity.User;
 import com.yy.OrganizationDemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

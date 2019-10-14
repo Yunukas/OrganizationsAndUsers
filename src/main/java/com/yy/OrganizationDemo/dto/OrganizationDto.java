@@ -1,6 +1,5 @@
 package com.yy.OrganizationDemo.dto;
 
-import java.util.List;
 import java.util.Set;
 
 public class OrganizationDto {

@@ -2,8 +2,6 @@ package com.yy.OrganizationDemo.service;
 
 import com.yy.OrganizationDemo.dto.OrganizationDto;
 import com.yy.OrganizationDemo.dto.UserDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Set;
