@@ -45,7 +45,6 @@ public class OrganizationController {
 
     // add a user to an organization
     @PutMapping(path = "/{orgId}/users/add")
-    @ResponseStatus(value = HttpStatus.OK)
     public void addUser(@PathVariable(name = "orgId") Long orgId,@RequestParam("id") Long userId) {
         organizationService.addUser(userId, orgId);
     }
