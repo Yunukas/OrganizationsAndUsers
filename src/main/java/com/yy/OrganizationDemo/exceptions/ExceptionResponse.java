@@ -2,6 +2,7 @@ package com.yy.OrganizationDemo.exceptions;
 
 import java.util.Date;
 
+// a custom format for exception responses
 public class ExceptionResponse {
     private Date timestamp;
     private String message;

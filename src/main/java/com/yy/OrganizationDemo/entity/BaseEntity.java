@@ -7,6 +7,7 @@ import java.util.Objects;
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 
+    // id field for both subclasses ( Organization and User )
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",updatable = false,nullable = false)

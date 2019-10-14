@@ -24,6 +24,7 @@ public class OrganizationServiceImp implements OrganizationService {
     @Autowired
     private UserRepository userRepository;
 
+    // create a single organization
     @Override
     public OrganizationDto save(OrganizationDto orgDto) {
         Organization organization = new Organization();
@@ -31,27 +32,22 @@ public class OrganizationServiceImp implements OrganizationService {
         organization.setAddress(orgDto.getAddress());
         organization.setPhone(orgDto.getPhone());
         organizationRepository.save(organization);
-
         orgDto.setId(organization.getId());
         return orgDto;
     }
 
+    // update a single organization
     @Override
     public OrganizationDto update(OrganizationDto orgDto) {
         Organization organization = organizationRepository.getOne(orgDto.getId());
-
-        if(organization == null){
-            throw new ResourceNotFound("Organization Id-" + orgDto.getId());
-        }
-
         organization.setName(orgDto.getName());
         organization.setAddress(orgDto.getAddress());
         organization.setPhone(orgDto.getPhone());
-
         organizationRepository.save(organization);
         return organization.getDto();
     }
 
+    // get a single organization from DB
     @Override
     public OrganizationDto get(Long orgId) {
         Optional<Organization> organization = organizationRepository.findById(orgId);
@@ -61,26 +57,21 @@ public class OrganizationServiceImp implements OrganizationService {
         return organization.map(Organization::getDto).get();
     }
 
+    // get the list of all organizations in DB
     @Override
     public List<OrganizationDto> getAll() {
         List<Organization> organizationList = organizationRepository.findAll();
-        if (organizationList == null) {
-            throw new ResourceNotFound("No organization exists.");
-        }
         List<OrganizationDto> organizationDtoList = new ArrayList<>();
-
         for(Organization org : organizationList){
             organizationDtoList.add(org.getDto());
         }
         return organizationDtoList;
     }
 
+    // read all users who belong to a specific organization
     @Override
     public Set<UserDto> getUsers(Long orgId) {
         Organization organization = organizationRepository.getOne(orgId);
-        if(organization == null){
-            throw new ResourceNotFound("Organization Id-" + orgId);
-        }
         Set<UserDto> userDtos = new HashSet<>();
 
         for(User user : organization.getUsers()){
@@ -88,44 +79,26 @@ public class OrganizationServiceImp implements OrganizationService {
         }
         return userDtos;
     }
-
+    // add a user to an organization
     @Override
     public void addUser(Long userId, Long orgId) {
         User user = userRepository.getOne(userId);
         Organization org = organizationRepository.getOne(orgId);
-        if(user == null) {
-            throw new ResourceNotFound("User Id-" + userId);
-        }
-        if(org == null){
-            throw new ResourceNotFound("Organization Id-" + orgId);
-        }
         user.getOrgs().add(org);
         userRepository.save(user);
     }
-
+    // delete a user from an organization
     @Override
     public void deleteUser(Long orgId, Long userId) {
         User user = userRepository.getOne(userId);
         Organization org = organizationRepository.getOne(orgId);
 
-        if(user == null){
-            throw new ResourceNotFound("User Id-" + userId);
-        }
-        if(org == null) {
-            throw new ResourceNotFound("Organization Id-" + orgId);
-        }
-
         if(!org.getUsers().contains(user)){
-            throw new ResourceNotFound("Organization Id-" + orgId + " does not have User Id-" + userId);
+            throw new ResourceNotFound(" No User Id-" + userId + " found in Organization Id-" + orgId);
         }
-
+        // remove the organization from the collection
         user.getOrgs().remove(org);
-        org.getUsers().remove(user);
+        // update the DB
         userRepository.save(user);
-    }
-
-    @Override
-    public void delete(Long orgId) {
-        organizationRepository.deleteById(orgId);
     }
 }

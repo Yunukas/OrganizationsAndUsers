@@ -21,45 +21,41 @@ public class OrganizationController {
     @Autowired
     private UserService userService;
 
+    // create an organization
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public @ResponseBody OrganizationDto createOrg(@RequestBody OrganizationDto orgDto) {
         return organizationService.save(orgDto);
     }
-
+    // get a list of all organizations
     @GetMapping
     public List<OrganizationDto> getAll() {
         return organizationService.getAll();
     }
-
+    // read a single organization
     @GetMapping(path = "/{orgId}")
     public @ResponseBody OrganizationDto getOrg(@PathVariable(name = "orgId") Long orgId) {
         return organizationService.get(orgId);
     }
-
+    // read all users who belong to a specific organization
     @GetMapping(path = "/{orgId}/users")
     public Set<UserDto> getUsers(@PathVariable(name = "orgId") Long orgId) {
         return organizationService.getUsers(orgId);
     }
 
+    // add a user to an organization
     @PutMapping(path = "/{orgId}/users/add")
     @ResponseStatus(value = HttpStatus.OK)
     public void addUser(@PathVariable(name = "orgId") Long orgId,@RequestParam("id") Long userId) {
         organizationService.addUser(userId, orgId);
     }
-
+    // update an organization
     @PutMapping(path = "/{orgId}")
     public @ResponseBody OrganizationDto updateOrg(@PathVariable(name = "orgId") Long orgId,@RequestBody OrganizationDto orgDto) {
         orgDto.setId(orgId);
         return organizationService.update(orgDto);
     }
-
-    @DeleteMapping(path = "/{orgId}")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteOrg(@PathVariable(name = "orgId") Long orgId) {
-        organizationService.delete(orgId);
-    }
-
+    // delete a user from an organization
     @DeleteMapping(path = "/{orgId}/users/delete")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void  deleteUser(@PathVariable(name = "orgId") Long orgId, @RequestParam(name = "id") Long userId) {

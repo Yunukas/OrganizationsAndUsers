@@ -9,6 +9,8 @@ import com.yy.OrganizationDemo.repository.OrganizationRepository;
 import com.yy.OrganizationDemo.repository.UserRepository;
 import com.yy.OrganizationDemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,7 +26,7 @@ public class UserServiceImp implements UserService {
     @Autowired
     private OrganizationRepository organizationRepository;
 
-
+    // create a single user
     @Override
     public UserDto save(UserDto userDto) {
         User user = new User();
@@ -38,6 +40,7 @@ public class UserServiceImp implements UserService {
         return userDto;
     }
 
+    // update a single user
     @Override
     public UserDto update(UserDto userDto) {
         User user = new User();
@@ -50,6 +53,7 @@ public class UserServiceImp implements UserService {
         return user.getDto();
     }
 
+    // get a single user
     @Override
     public UserDto get(Long userId) {
         Optional<User> user = userRepository.findById(userId);
@@ -59,32 +63,28 @@ public class UserServiceImp implements UserService {
         return user.map(User::getDto).get();
     }
 
+    // get all users from DB
     @Override
     public List<UserDto> getAll() {
         List<User> userList = userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
-
         for(User user : userList){
             userDtoList.add(user.getDto());
         }
         return userDtoList;
     }
-
+    // read all organizations to which a user belongs
     @Override
     public Set<OrganizationDto> getOrgs(Long userId) {
         User user = userRepository.getOne(userId);
-
-        if(user == null){
-            throw new ResourceNotFound("User Id-" + userId);
-        }
         Set<OrganizationDto> organizationDtos = new HashSet<>();
-
         for(Organization organization : user.getOrgs()){
             organizationDtos.add(organization.getDto());
         }
         return organizationDtos;
     }
 
+    // delete a single user
     @Override
     public void delete(Long userId) {
         userRepository.deleteById(userId);

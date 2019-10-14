@@ -36,9 +36,9 @@ public class User extends BaseEntity {
 
     @ManyToMany(fetch = FetchType.LAZY,
         cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-        })
+        CascadeType.PERSIST,
+                CascadeType.MERGE
+    })
     @JoinTable(name = "org_users",
         joinColumns = {@JoinColumn(name = "user_id")},
         inverseJoinColumns = {@JoinColumn(name = "org_id")})
@@ -89,6 +89,7 @@ public class User extends BaseEntity {
         return orgs;
     }
 
+    // this method is used to get the organization ids to which a user belongs
     private Set<Long> getOrgIds(){
         Set<Long> orgIds = new HashSet<>();
         for(Organization organization : orgs){
@@ -96,7 +97,7 @@ public class User extends BaseEntity {
         }
         return orgIds;
     }
-
+    // create the user dto object to be displayed
     public UserDto getDto() {
         UserDto dto = new UserDto();
         dto.setId(getId());

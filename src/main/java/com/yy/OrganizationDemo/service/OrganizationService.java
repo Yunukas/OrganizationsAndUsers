@@ -20,6 +20,4 @@ public interface OrganizationService {
     void deleteUser(Long orgId, Long userId);
 
     Set<UserDto> getUsers(Long orgId);
-
-    void delete(Long orgId);
 }

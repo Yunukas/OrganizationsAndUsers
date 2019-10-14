@@ -16,7 +16,7 @@ import java.util.Set;
 public class Organization extends BaseEntity {
 
     @NotNull
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @NotNull
@@ -60,6 +60,7 @@ public class Organization extends BaseEntity {
         return users;
     }
 
+    // this method is used to get the ids of users who belong to a specific organization
     private Set<Long> getUserIds(){
         Set<Long> userIds = new HashSet<>();
         for(User user : users){
@@ -67,6 +68,7 @@ public class Organization extends BaseEntity {
         }
         return userIds;
     }
+    // create the organization dto object to be displayed
     public OrganizationDto getDto(){
         OrganizationDto organizationDto = new OrganizationDto();
         organizationDto.setId(getId());
