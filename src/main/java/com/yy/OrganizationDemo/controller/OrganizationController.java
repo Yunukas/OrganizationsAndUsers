@@ -24,7 +24,7 @@ public class OrganizationController {
     // create an organization
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public @ResponseBody OrganizationDto createOrg(@RequestBody OrganizationDto orgDto) {
+    public OrganizationDto createOrg(@RequestBody OrganizationDto orgDto) {
         return organizationService.save(orgDto);
     }
     // get a list of all organizations
@@ -34,7 +34,7 @@ public class OrganizationController {
     }
     // read a single organization
     @GetMapping(path = "/{orgId}")
-    public @ResponseBody OrganizationDto getOrg(@PathVariable(name = "orgId") Long orgId) {
+    public OrganizationDto getOrg(@PathVariable(name = "orgId") Long orgId) {
         return organizationService.get(orgId);
     }
     // read all users who belong to a specific organization
@@ -51,7 +51,7 @@ public class OrganizationController {
     }
     // update an organization
     @PutMapping(path = "/{orgId}")
-    public @ResponseBody OrganizationDto updateOrg(@PathVariable(name = "orgId") Long orgId,@RequestBody OrganizationDto orgDto) {
+    public OrganizationDto updateOrg(@PathVariable(name = "orgId") Long orgId,@RequestBody OrganizationDto orgDto) {
         orgDto.setId(orgId);
         return organizationService.update(orgDto);
     }

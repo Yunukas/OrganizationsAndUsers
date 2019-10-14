@@ -31,6 +31,7 @@ public class OrganizationServiceImp implements OrganizationService {
         organization.setName(orgDto.getName());
         organization.setAddress(orgDto.getAddress());
         organization.setPhone(orgDto.getPhone());
+
         organizationRepository.save(organization);
         orgDto.setId(organization.getId());
         return orgDto;

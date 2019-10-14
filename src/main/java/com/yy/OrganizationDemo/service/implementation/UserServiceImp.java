@@ -41,7 +41,7 @@ public class UserServiceImp implements UserService {
     // update a single user
     @Override
     public UserDto update(UserDto userDto) {
-        User user = new User();
+        User user = userRepository.getOne(userDto.getId());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setPhone(userDto.getPhone());

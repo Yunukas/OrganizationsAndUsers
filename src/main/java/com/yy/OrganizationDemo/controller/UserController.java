@@ -20,7 +20,7 @@ public class UserController {
     // create a single user
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public @ResponseBody UserDto createUser(@RequestBody UserDto userDto) {
+    public UserDto createUser(@RequestBody UserDto userDto) {
         return userService.save(userDto);
     }
 
@@ -40,6 +40,13 @@ public class UserController {
     @GetMapping(path = "/{userId}/organizations")
     public Set<OrganizationDto> getOrg(@PathVariable(name = "userId") Long userId) {
         return userService.getOrgs(userId);
+    }
+
+    // update a single user
+    @PutMapping(path = "/{userId}")
+    public UserDto update(@PathVariable(name = "userId") Long userId,@RequestBody UserDto userDto) {
+        userDto.setId(userId);
+        return userService.update(userDto);
     }
 
     // delete a single user

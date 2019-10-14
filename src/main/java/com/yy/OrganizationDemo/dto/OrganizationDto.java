@@ -1,5 +1,6 @@
 package com.yy.OrganizationDemo.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class OrganizationDto {
@@ -9,7 +10,8 @@ public class OrganizationDto {
     private String phone;
     private Set<Long> users;
 
-    public OrganizationDto(){}
+    public OrganizationDto(){ users = new HashSet<>();
+    }
 
     public Long getId() {
         return id;

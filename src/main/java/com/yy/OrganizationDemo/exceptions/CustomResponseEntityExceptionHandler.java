@@ -1,5 +1,6 @@
 package com.yy.OrganizationDemo.exceptions;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -52,5 +53,15 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                 ex.getMessage(), request.getDescription(false));
 
         return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    // for DataIntegrityViolationException
+    // thrown when a duplicate entry(for organization name) is posted
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final ResponseEntity handleDataIntegrityViolationException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(),
+                "This organizations already exists.", request.getDescription(false));
+
+        return new ResponseEntity(exceptionResponse, HttpStatus.CONFLICT);
     }
 }
