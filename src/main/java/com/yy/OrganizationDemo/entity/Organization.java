@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "organizations")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Organization extends BaseEntity {
 
