@@ -1,9 +1,11 @@
 # OrganizationsAndUsers
 
 
+### Database Schema
 ![DB Relations](https://github.com/Yunukas/OrganizationsAndUsers/blob/master/db_relation.png)
 
 
+### Project Structure
 ![Project Structure](https://github.com/Yunukas/OrganizationsAndUsers/blob/master/organizationDemoDiagram.png)
 
 
@@ -17,26 +19,28 @@
 ## Routes
 #### Below HTTP methods are supported.
 
-GET		/users
+GET		    /users
 
-GET		/organizations
+GET		    /organizations
 
-GET		/users/<userId>
+GET		    /users/{userId}
   
-GET		/users/<userId>/organizations
+GET		    /users/{userId}/organizations
   
-GET		/organizations/<organizationId>
+GET		    /organizations/{organizationId}
   
-GET		/organizations/<organizationId>/users
+GET		    /organizations/{organizationId}/users
   
-POST	/users
+POST	    /users
 
-POST	/organizations
+POST	    /organizations
 
-PUT		/organizations/<organizationId>
+PUT		    /users/{userId}
 
-PUT		/organizations/<organizationId>/users/add?id=<userId>
+PUT		    /organizations/{organizationId}
 
-DELETE	/users/<userId>
+PUT		    /organizations/{organizationId}/users/add?id={userId}
 
-DELETE	/organizations/<organizationId>/users/delete?id=<userId>
+DELETE    /users/{userId}
+
+DELETE	  /organizations/{organizationId}/users/delete?id={userId}
